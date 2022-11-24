@@ -3,10 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
+ * @extends Factory<Product>
  */
 class ProductFactory extends Factory
 {
@@ -15,7 +16,11 @@ class ProductFactory extends Factory
         return [
             'title' => ucfirst($this->faker->words(3, true)),
             'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-            'thumbnail' => '',
+            'thumbnail' => $this->faker->file(
+                base_path('/tests/Fixtures/images/products'),
+                storage_path('app/public/images/products'),
+                false
+            ),
             'price' => $this->faker->numberBetween(1000, 100000),
         ];
     }

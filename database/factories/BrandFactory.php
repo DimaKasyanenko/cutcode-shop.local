@@ -14,8 +14,11 @@ class BrandFactory extends Factory
     {
         return [
             'title' => $this->faker->company(),
-            // TODO 3rd lesson
-            'thumbnail' => ''
+            'thumbnail' => $this->faker->file(
+                base_path('/tests/Fixtures/images/brands'),
+                storage_path('app/public/images/brands'),
+                false
+            ),
         ];
     }
 }
